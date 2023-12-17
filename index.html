@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="js" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Base64</title>
+    <link rel="stylesheet" href="./Base64_files/dashlite.min.css">
+    <link rel="shortcut icon" href="./Base64_files/base64_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./Base64_files/style.min.css">
+    <link rel="stylesheet" href="./Base64_files/layer.css" id="layuicss-layer">
+    </head>
+<body style="padding: 0px;" aria-hidden="false" inject_svd="true" class="nk-body npc-invest bg-lighter no-touch nk-nio-theme">
+    <h1></h1>
+    <div>
+		<div class="nk-header nk-header-fluid nk-header-fixed is-light">
+		    <div class="container-xl">
+		        <div class="nk-header-wrap">
+		            <div class="nk-header-brand">
+		                <a class="font-weight-bold" style="font-size: 20px;">Base64 编码/解码器</a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+        <div class="nk-content nk-content-lg nk-content-fluid">
+            <div class="container-xl" id="app">
+                <div class="col-sm-12 col-md-10 col-xl-8 center-block">
+                    <div class="card card-preview">
+                        <div class="card-inner mt-3">
+                            <div class="nya-title nk-ibx-action-item progress-rating">
+                                <span class="nk-menu-text font-weight-bold" style="font-size: 18px;">Base64</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input&quot;" style="font-size: 15px;">字符串</label>
+                                <div class="form-control-wrap">
+                                    <textarea class="form-control" id="input" rows="8"></textarea>
+                                </div>
+                            </div>
+                            <div class="row pt-1 pb-1">
+                                <div class="col-3">
+                                    <button class="btn btn-dim btn-outline-secondary btn-block card-link" onclick="encode()" style="font-size: 15px;">
+                                        编码
+                                    </button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-dim btn-outline-secondary btn-block card-link" onclick="decode()" style="font-size: 15px;">
+                                        解码
+                                    </button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-dim btn-outline-secondary btn-block card-link" onclick="copy()" style="font-size: 15px;">
+                                        复制
+                                    </button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-dim btn-outline-secondary btn-block card-link" onclick="reset()" style="font-size: 15px;">
+                                        清空
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="form-label" for="output" style="font-size: 15px;">结果</label>
+                                <div class="form-control-wrap">
+                                    <textarea class="form-control" id="output" rows="8"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div style="display: flex; justify-content: center;">
+		<h6>使用软件时遇到 Bug ？</h6>
+		<a href="./report.html" class="btn btn-sm btn-outline-danger mr-3" style="text-align: center;">
+			<span class="nk-menu-text">反馈问题</span>
+		</a>
+	</div>
+	<div style="display: flex; justify-content: center;">
+		<h6></h6>
+		<a></a>
+	</div>
+	<div style="display: flex; justify-content: center;">
+		<h6>觉得软件很好用？</h6>
+		<a href="./report.html" class="btn btn-sm btn-outline-light" style="text-align: center;">
+			<span class="nk-menu-text">提出建议</span>
+		</a>
+		<h6>或者</h6>
+		<a href="https://github.com/Mcpezht/Base64_Android" class="btn btn-sm btn-outline-light" style="text-align: center;">
+			<span class="nk-menu-text">给此项目在 GitHub 上点个 ⭐</span>
+		</a>
+	</div>
+	<div style="display: flex; justify-content: center;">
+		<h6></h6>
+		<a></a>
+	</div>
+	<div style="display: flex; justify-content: center;">
+		<h6></h6>
+		<a>
+		</a>
+	</div>
+	<div class="nk-footer nk-footer-fluid bg-lighter">
+	    <div class="container-xl">
+	        <div class="nk-footer-wrap">
+	            <div class="font-weight-bold" style="font-size: 18px; text-align: center;">Base64 Codec | v1.3<br><a href="https://github.com/Mcpezht">(C) 2023-2024 Mcpezht Studio</div>
+	        </div>
+	    </div>
+	</div>
+	
+    <script src="./Base64_files/jquery.min.js"></script>
+    <script src="./Base64_files/layer.js"></script>
+    <script src="./Base64_files/script.js"></script>
+    <script src="./Base64_files/crypto-js.min.js"></script>
+    <script>
+        function encode() {
+            var input = $("#input").val();
+            try {
+                const wordArray = CryptoJS.enc.Utf8.parse(input);
+                var output = CryptoJS.enc.Base64.stringify(wordArray);
+                $("#output").val(output);
+            } catch (e) {
+                layer.msg(e.message, {
+                    icon: 2
+                });
+                $("#output").val('');
+            }
+        }
+        function decode() {
+            var input = $("#input").val();
+            try {
+                output = CryptoJS.enc.Base64.parse(input).toString(CryptoJS.enc.Utf8);
+                $("#output").val(output);
+            } catch (e) {
+                layer.msg(e.message, {
+                    icon: 2
+                });
+                $("#output").val('');
+            }
+        }
+        function copy() {
+          var text = document.getElementById("output").value;
+          var tempInput = document.createElement("input");
+          tempInput.value = text;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempInput);
+        }
+        function reset() {
+            $("#input").val('');
+            $("#output").val('');
+        }
+    </script>
+</body>
+</html>
